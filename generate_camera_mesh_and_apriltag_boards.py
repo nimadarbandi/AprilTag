@@ -1251,9 +1251,22 @@ def draw_global_plan(
             cam.x_center_ft,
             cam.y_center_ft,
             cam.camera_id,
-            fontsize=cfg.plan_camera_label_fontsize,
+            fontsize=7,
             color="#0d4f8b",
             fontweight="bold",
+            ha="center",
+            va="bottom",
+        )
+        ax.annotate(
+            f" ({cam.x_center_ft:.1f},{cam.y_center_ft:.1f})",
+            (cam.x_center_ft, cam.y_center_ft),
+            xytext=(9, 0),
+            textcoords="offset points",
+            ha="left",
+            va="bottom",
+            fontsize=7,
+            color="black",
+            fontweight="normal",
         )
 
     # Board rectangles (green boxes) sized by board_width_ft x board_height_ft.
@@ -1305,7 +1318,7 @@ def draw_global_plan(
                 rotation=90,
                 ha="center",
                 va="top",
-                color="#555555",
+                color="black",
                 clip_on=False,
             )
 
@@ -1318,7 +1331,7 @@ def draw_global_plan(
                 fontsize=cfg.plan_line_label_fontsize,
                 ha="right",
                 va="center",
-                color="#555555",
+                color="black",
                 clip_on=False,
             )
 

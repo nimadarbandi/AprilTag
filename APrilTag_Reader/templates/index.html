@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <p class="eyebrow">VIDEO ANALYSIS</p>
+  <h1>Find AprilTags in a video.</h1>
+  <p>Upload a recording to generate a playable, annotated video and a timestamped detection report.</p>
+</section>
+<form class="upload-card" method="post" enctype="multipart/form-data">
+  <label class="file-field">Video file
+    <input name="video" type="file" accept="video/*,.mkv,.m4v" required>
+  </label>
+  <div class="form-grid">
+    <label>Tag family
+      <select name="family">
+        <option value="tag36h11">tag36h11</option>
+        <option value="tag36h10">tag36h10</option>
+        <option value="tag25h9">tag25h9</option>
+        <option value="tag16h5">tag16h5</option>
+      </select>
+    </label>
+    <label>Physical tag side (inches)
+      <input name="tag_size_inches" type="number" min="0.01" step="0.01" value="7" required>
+    </label>
+    <label>Camera focal length X (pixels, optional)
+      <input name="fx" type="number" min="1" step="0.1" placeholder="e.g. 1200.5">
+    </label>
+    <label>Camera focal length Y (pixels, optional)
+      <input name="fy" type="number" min="1" step="0.1" placeholder="e.g. 1198.2">
+    </label>
+  </div>
+  <p class="hint">For accurate distance and translation, enter calibrated focal lengths. Without them, the app uses a rough focal-length estimate and labels each measurement as estimated.</p>
+  <button type="submit">Process video</button>
+</form>
+{% endblock %}

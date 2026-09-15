@@ -1,0 +1,12 @@
+:root { color-scheme: dark; font-family: Inter, ui-sans-serif, system-ui, sans-serif; background:#0d1017; color:#ecf1f6; }
+* { box-sizing:border-box; } body { margin:0; } .page { max-width:1200px; padding:34px 24px 64px; margin:auto; }
+.brand { color:#83e8af; text-decoration:none; font-weight:700; letter-spacing:.02em; } .hero { max-width:720px; margin:70px 0 34px; }
+h1 { font-size:clamp(2rem, 5vw, 4rem); margin:.15em 0; line-height:1.05; } h2 { margin-top:0; } p { color:#b7c2d0; line-height:1.55; } .eyebrow { color:#83e8af; letter-spacing:.13em; font-weight:bold; font-size:.75rem; margin:0; }
+.upload-card { background:#161c28; border:1px solid #293447; border-radius:16px; padding:28px; } label { display:grid; gap:8px; color:#dfe8f2; font-weight:600; }
+input, select { background:#0e141e; border:1px solid #3a485f; border-radius:7px; padding:11px; color:inherit; font:inherit; width:100%; } .file-field { margin-bottom:22px; }
+.form-grid { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:18px; } small { color:#9eacbd; font-weight:400; } .hint { max-width:800px; font-size:.92rem; }
+button, .download { display:inline-block; border:0; border-radius:8px; padding:12px 17px; background:#83e8af; color:#102117; font-weight:800; text-decoration:none; cursor:pointer; font:inherit; }
+.flash { padding:13px; border-radius:8px; margin-top:20px; } .flash.error { background:#48212a; color:#ffc6ce; } .result-heading { display:flex; gap:20px; align-items:center; justify-content:space-between; margin:50px 0 20px; }
+.viewer { display:grid; grid-template-columns:minmax(0, 3fr) minmax(260px, 1fr); background:#161c28; border:1px solid #293447; border-radius:16px; overflow:hidden; } video { width:100%; max-height:70vh; background:#05070a; } aside { padding:22px; border-left:1px solid #293447; overflow:auto; max-height:70vh; }
+article { background:#202a38; border-radius:8px; padding:12px; margin:10px 0; } .summary { display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin:20px 0; } .summary div { background:#161c28; border-radius:10px; padding:15px; } .summary span { display:block; color:#9eacbd; font-size:.8rem; } .summary strong { font-size:1.2rem; }
+.note { font-size:.9rem; } @media (max-width:760px) { .form-grid,.viewer,.summary { grid-template-columns:1fr; } aside { border-left:0; border-top:1px solid #293447; } .result-heading { align-items:start; flex-direction:column; } }

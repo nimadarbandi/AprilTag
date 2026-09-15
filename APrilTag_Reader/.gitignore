@@ -1,0 +1,7 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+uploads/*
+!uploads/.gitkeep
+outputs/*
+!outputs/.gitkeep

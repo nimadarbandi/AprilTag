@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Annotated AprilTag video{% endblock %}
+{% block content %}
+<div class="result-heading">
+  <div><p class="eyebrow">COMPLETE</p><h1>Annotated video</h1></div>
+  <a class="download" href="{{ url_for('output', job_id=job_id, filename='detections.json') }}">Download JSON report</a>
+</div>
+<section class="viewer">
+  <video id="video" controls preload="metadata" playsinline>
+    <source src="{{ url_for('output', job_id=job_id, filename='annotated.mp4') }}" type="video/mp4">
+    Your browser cannot play this video.
+  </video>
+  <aside>
+    <h2>At current time</h2>
+    <p id="current-time">Move the video timeline to inspect detections.</p>
+    <div id="current-detections"></div>
+  </aside>
+</section>
+<section class="summary">
+  <div><span>Unique tags</span><strong>{{ metadata.summary.unique_tag_ids|join(', ') if metadata.summary.unique_tag_ids else 'None' }}</strong></div>
+  <div><span>Detections</span><strong>{{ metadata.summary.detection_count }}</strong></div>
+  <div><span>Frames processed</span><strong>{{ metadata.summary.frames_processed }}</strong></div>
+  <div><span>Detector</span><strong>{{ metadata.detector.backend }}</strong></div>
+</section>
+<p class="note">Distance is straight-line camera-to-tag distance. “Calibrated” values use your supplied focal lengths; “estimated” values are only a rough range approximation.</p>
+<script id="metadata" type="application/json">{{ metadata|tojson }}</script>
+<script>
+  const metadata = JSON.parse(document.getElementById('metadata').textContent);
+  const video = document.getElementById('video');
+  const time = document.getElementById('current-time');
+  const list = document.getElementById('current-detections');
+  const fps = metadata.video.fps || 30;
+  function showDetections() {
+    const frame = Math.round(video.currentTime * fps);
+    const rows = metadata.detections.filter(d => d.frame === frame);
+    time.textContent = `Time ${video.currentTime.toFixed(2)} s · frame ${frame}`;
+    list.innerHTML = rows.length ? rows.map(d => `<article><b>AprilTag ${d.tag_id}</b><br>Distance: ${d.distance_m ?? 'unavailable'} m (${d.distance_ft ?? '—'} ft)<br><small>${d.distance_quality}; centre ${d.center_px[0]}, ${d.center_px[1]} px${d.decision_margin !== null ? `; confidence ${d.decision_margin}` : ''}</small></article>`).join('') : '<p>No tags detected in this frame.</p>';
+  }
+  video.addEventListener('timeupdate', showDetections);
+  video.addEventListener('seeked', showDetections);
+  showDetections();
+</script>
+{% endblock %}
